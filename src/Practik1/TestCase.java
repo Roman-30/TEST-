@@ -13,11 +13,11 @@ public class TestCase {
         this.name = name;
     }
 
-    public  double getX() {
-        return x;
+    public String getName() {
+        return name;
     }
 
-    public double getY() {
-       return  y;
+    public Figure getFigure() {
+        return figure;
     }
 }

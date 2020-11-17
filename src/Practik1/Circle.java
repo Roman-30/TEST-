@@ -5,6 +5,7 @@ public class Circle {
     public double y0;
     public double radius;
     public String name;
+    public Figure type;
 
     public Circle(double x0, double y0, double radius, String name) {
         this.x0 = x0;
@@ -12,9 +13,12 @@ public class Circle {
         this.radius = radius;
         this.name = name;
     }
-
     public String getName() {
         return name;
+    }
+
+    public Figure setType() {
+        return type = Figure.Circle;
     }
 
     public boolean isPointInside(double x, double y) {

@@ -4,5 +4,5 @@ public enum Figure {
     Point,
     Line_segment,
     Circle,
-    Poligon,
+    Polygon,
 }

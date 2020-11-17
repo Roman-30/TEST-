@@ -5,17 +5,21 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        PointFigure pointFigure = new PointFigure(readSomething("Enter coordinate X point: "), readSomething("Enter coordinate Y point: "), readName("Enter point name: "));
-        LineSegment lineSegment = new LineSegment(readSomething("Enter first coordinate X line segment: "), readSomething("Enter first coordinate Y line segment: "), readSomething("Enter second coordinate X line segment: "), readSomething("Enter second coordinate X line segment: "), readName("Enter line segment name: "));
-        Circle circle = new Circle(readSomething("Enter the coordinate X of the center of the circle: "), readSomething("Enter the coordinate Y of the center of the circle: "), readSomething("Enter radius of the center of the circle: "), readName("Enter circle name: "));
-        Poligon poligon = new Poligon(readSomething("Enter the number of sides: "), getPoligonPoints(readSomething("Enter the number of sides: ")), readName("Enter poligon name: "));
+        if (testMyPicture()) {
 
-        startProgram(pointFigure, lineSegment, circle, poligon);
+            PointFigure pointFigure = new PointFigure(readSomething("Enter coordinate X point: "), readSomething("Enter coordinate Y point: "), readName("Enter point name: "));
+            LineSegment lineSegment = new LineSegment(readSomething("Enter first coordinate X line segment: "), readSomething("Enter first coordinate Y line segment: "), readSomething("Enter second coordinate X line segment: "), readSomething("Enter second coordinate X line segment: "), readName("Enter line segment name: "));
+            Circle circle = new Circle(readSomething("Enter the coordinate X of the center of the circle: "), readSomething("Enter the coordinate Y of the center of the circle: "), readSomething("Enter radius of the center of the circle: "), readName("Enter circle name: "));
+            Polygon poligon = new Polygon(readTheNumberVertices("Enter the number of sides: "), getPoligonPoints(readTheNumberVertices("Enter the number of sides: ")), readName("Enter poligon name: "));
+            startProgram(pointFigure, lineSegment, circle, poligon);
+        } else {
+            System.out.println("Error. The program does not work correctly!\n");
+        }
     }
 
-    private static Point[] getPoligonPoints(double n) {
-        int Convex = 1;
-        Point[] points = new Point[(int) n];
+    private static Point[] getPoligonPoints(int n) {
+
+        Point[] points = new Point[n];
 
         for (int i = 0; i < n; i++) {
             double x = readSomething("Enter coordinate X poligon: ");
@@ -26,7 +30,7 @@ public class Main {
         }
         if (n == 3) {
             return points;
-        } else if (n >= 4 && Poligon.definePolygon(points, (int) n, Convex) == Convex) {
+        } else if (n >= 4 && Polygon.definePolygon(points, n)) {
             System.out.println("Polygon convex");
             return points;
         } else {
@@ -34,31 +38,53 @@ public class Main {
             return getPoligonPoints(n);
         }
     }
-  /*
-    public static void setTestPoint() {
-       PointFigure pointFigureTest = new PointFigure(1, 1, "Point1");
-       LineSegment lineSegment1Test = new LineSegment(9, 9, 6, 6, "Line segment1");
-       Circle circleTest = new Circle(-8, -8, 2, "Circle1");
-       Poligon poligonTest = new Poligon(4, getTestPoligonPoints(4), "Poligon1");
-    }
 
-    public static boolean testPoint(PointFigure pointFigureTest, LineSegment lineSegmentTest, Circle circleTest, Poligon poligonTest) {
-        for (int i = 0; ) {
-        TestCase[] points1 = new TestCase[4];
-        points1[0] = new TestCase(1, 1, Figure.Point, "Point1");
-        points1[1] = new TestCase(7, 7, Figure.Line_segment, "Line segment1");
-        points1[2] = new TestCase(-8, -8, Figure.Circle, "Circle1");
-        points1[3] = new TestCase(1, 3, Figure.Poligon, "Poligon1");
+    public static boolean testMyPicture() {
+        boolean resalt = true;
 
-        
-            Point point = new Point(test.getX(), test.getY());
+        PointFigure pointFigureTest = new PointFigure(1, 1, "Point1");
+        LineSegment lineSegmentTest = new LineSegment(7, 7, 4, 4, "Line segment1");
+        Circle circleTest = new Circle(-5, -6, 2, "Circle1");
+        Polygon poligonTest = new Polygon(4, getPoints(), "Poligon1");
 
-       if (pointFigureTest.isPointInside(test.getX(), test.getY())) {
-       }
+        TestCase[] casePoints = new TestCase[4];
+        casePoints[0] = new TestCase(1, 1, Figure.Point, "Point1");
+        casePoints[1] = new TestCase(7, 7, Figure.Line_segment, "Line segment1");
+        casePoints[2] = new TestCase(-5, -6, Figure.Circle, "Circle1");
+        casePoints[3] = new TestCase(1, 3, Figure.Polygon, "Poligon1");
+
+        if (pointFigureTest.isPointInside(casePoints[0].x, casePoints[0].y) && (pointFigureTest.setType().equals(casePoints[0].getFigure()) && (pointFigureTest.getName().equals(casePoints[0].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", pointFigureTest.setType(), pointFigureTest.getName(), casePoints[0].getFigure(), casePoints[0].getName(), true);
+        } else {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", pointFigureTest.setType(), pointFigureTest.getName(), casePoints[0].getFigure(), casePoints[0].getName(), false);
+            resalt = false;
         }
+
+        if (lineSegmentTest.isPointInside(casePoints[1].x, casePoints[1].y) && (lineSegmentTest.setType().equals(casePoints[1].getFigure()) && (lineSegmentTest.getName().equals(casePoints[1].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", lineSegmentTest.setType(), lineSegmentTest.getName(), casePoints[1].getFigure(), casePoints[1].getName(), true);
+        } else {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", lineSegmentTest.setType(), lineSegmentTest.getName(), casePoints[1].getFigure(), casePoints[1].getName(), false);
+            resalt = false;
+        }
+
+        if (circleTest.isPointInside(casePoints[2].x, casePoints[2].y) && (circleTest.setType().equals(casePoints[2].getFigure()) && (circleTest.getName().equals(casePoints[2].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", circleTest.setType(), circleTest.getName(), casePoints[2].getFigure(), casePoints[2].getName(), true);
+        } else {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", circleTest.setType(), circleTest.getName(), casePoints[2].getFigure(), casePoints[2].getName(), false);
+            resalt = false;
+        }
+
+        if (poligonTest.isPointInside(casePoints[3].x, casePoints[3].y) && (poligonTest.setType().equals(casePoints[3].getFigure()) && (poligonTest.getName().equals(casePoints[3].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", poligonTest.setType(), poligonTest.getName(), casePoints[3].getFigure(), casePoints[3].getName(), true);
+        } else {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", poligonTest.setType(), poligonTest.getName(), casePoints[3].getFigure(), casePoints[3].getName(), false);
+            resalt = false;
+        }
+
+        return resalt;
     }
 
-    public static Point[] getTestPoligonPoints(double n) {
+    public static Point[] getPoints() {
         Point[] points = new Point[4];
         points[0] = new Point(0, 3);
         points[1] = new Point(0, 0);
@@ -66,40 +92,46 @@ public class Main {
         points[3] = new Point(3, 3);
         return points;
     }
-          */
-    public static void startProgram(PointFigure pointFigure, LineSegment lineSegment, Circle circle, Poligon poligon) {
+
+    public static void startProgram(PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
         double x = readSomething("Enter coordinate X check: ");
         double y = readSomething("Enter coordinate Y check: ");
 
         printAnswer(x, y, pointFigure, lineSegment, circle, poligon);
     }
 
-    public static double readSomething(String name) {
-        Scanner scn = new Scanner(System.in);
+    public static int readTheNumberVertices(String name) {
+        Scanner scn3 = new Scanner(System.in);
         System.out.print(name);
-        return scn.nextDouble();
+        return scn3.nextInt();
+    }
+
+    public static double readSomething(String name) {
+        Scanner scn2 = new Scanner(System.in);
+        System.out.print(name);
+        return scn2.nextDouble();
     }
 
     public static String readName(String name) {
-        Scanner enter = new Scanner(System.in);
+        Scanner scn1 = new Scanner(System.in);
         System.out.print(name);
-        return enter.nextLine();
+        return scn1.nextLine();
     }
 
-    public static void printAnswer(double x, double y, PointFigure pointFigure, LineSegment lineSegment, Circle circle, Poligon poligon) {
+    public static void printAnswer(double x, double y, PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
         if (pointFigure.isPointInside(x, y)) {
-            System.out.println("Type: " + Figure.Point + ", Name: " + pointFigure.getName());
+            System.out.println("Type: " + pointFigure.setType() + ", Name: " + pointFigure.getName());
         }
         if (lineSegment.isPointInside(x, y)) {
-            System.out.println("Type: " + Figure.Line_segment + ", Name: " + lineSegment.getName());
+            System.out.println("Type: " + lineSegment.setType() + ", Name: " + lineSegment.getName());
         }
         if (circle.isPointInside(x, y)) {
-            System.out.println("Type: " + Figure.Circle + ", Name: " + circle.getName());
+            System.out.println("Type: " + circle.setType() + ", Name: " + circle.getName());
         }
         if (poligon.isPointInside(x, y)) {
-            System.out.println("Type: " + Figure.Poligon + ", Name: " + poligon.getName());
+            System.out.println("Type: " + poligon.setType() + ", Name: " + poligon.getName());
         }
-        if (!pointFigure.isPointInside(x, y) && !lineSegment.isPointInside(x, y) && !circle.isPointInside(x, y) && !poligon.isPointInside(x, y)) {
+        if (pointFigure.isPointInside(x, y) && lineSegment.isPointInside(x, y) && circle.isPointInside(x, y) && poligon.isPointInside(x, y)) {
             System.out.println("You are not in any of the figure areas");
         }
     }

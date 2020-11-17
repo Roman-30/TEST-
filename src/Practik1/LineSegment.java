@@ -2,17 +2,22 @@ package Practik1;
 
 public class LineSegment {
     public String name;
-    double x0;
-    double y0;
-    double x1;
-    double y1;
+    public Figure type;
+    public double x0;
+    public double y0;
+    public double x1;
+    public double y1;
 
     public LineSegment(double x0, double y0, double x1, double y1, String name) {
-        this.x0 = x0;
-        this.y0 = y0;
-        this.x1 = x1;
-        this.y1 = y1;
+        this.x0 = Math.min(x0, x1);
+        this.y0 = Math.min(y0, y1);
+        this.x1 = Math.max(x1, x0);
+        this.y1 = Math.max(y1, y0);
         this.name = name;
+    }
+
+    public Figure setType() {
+        return type = Figure.Line_segment;
     }
 
     public String getName() {
@@ -28,7 +33,7 @@ public class LineSegment {
         double dy1 = y1 - y0;
         double dx = x - x0;
         double dy = y - y0;
-        double S = dx1 * dy - dx * dy1;                        // Подправить(ограничить)
+        double S = dx1 * dy - dx * dy1;
 
         return (((x0 == x) && (y0 == y)) || ((x1 == x) && (y1 == y)) || ((S == 0) && (AB >= AC && AB >= AO)));
     }
