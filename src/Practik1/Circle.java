@@ -10,9 +10,10 @@ public class Circle {
     public Circle(double x0, double y0, double radius, String name) {
         this.x0 = x0;
         this.y0 = y0;
-        this.radius = radius;
+        this.radius = Math.abs(radius);
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
