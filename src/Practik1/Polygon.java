@@ -1,10 +1,10 @@
 package Practik1;
 
 public class Polygon {
-    public int n;
-    public String name;
-    public Figure type;
-    public Point[] points;
+    private final int n;
+    private final String name;
+    private final Figure type = Figure.Polygon;
+    private final Point[] points;
 
     public Polygon(int n, Point[] points, String name) {
         this.n = n;
@@ -12,14 +12,38 @@ public class Polygon {
         this.name = name;
     }
 
+    public static Point[] setPolygonPoints(int n) {
+        int f = 0;
+        Point[] points = new Point[n];
+
+        for (int i = 0; i < n; i++) {
+
+            f++;
+            double x0 = Main.readCoordinate("Enter " + f + " coordinate X poligon: ");
+            double y0 = Main.readCoordinate("Enter " + f + " coordinate Y poligon: ");
+
+            Point point = new Point(x0, y0);
+            points[i] = point;
+        }
+        if (n == 3) {
+            return points;
+        } else if (n >= 4 && Polygon.definePolygon(points, n)) {
+            System.out.println("Polygon convex");
+            return points;
+        } else {
+            System.out.println("Error, poligon concave! Re-enter vertex coordinates.");
+            return setPolygonPoints(n);
+        }
+    }
+
     public static boolean definePolygon(Point[] points, int n) {
         int negative = 0;
         int positive = 0;
 
         for (int i = 0; i < n; i++) {
-            int j = (i + 1) % n;
-            int k = (i + 2) % n;
-            double z = (points[j].x - points[i].x) * (points[k].y - points[j].y) - (points[j].y - points[i].y) * (points[k].x - points[j].x);
+            int s = (i + 1) % n;
+            int t = (i + 2) % n;
+            double z = (points[s].getX() - points[i].getX()) * (points[t].getY() - points[s].getY()) - (points[s].getY() - points[i].getY()) * (points[t].getX() - points[s].getX());
             if (z < 0) {
                 negative += 1;
             } else if (z > 0) {
@@ -33,21 +57,21 @@ public class Polygon {
         return name;
     }
 
-    public Figure setType() {
-        return type = Figure.Polygon;
+    public Figure getType() {
+        return type;
     }
 
     public boolean isPointInside(double x, double y) {
         int resalt = 0;
         int digit = 0;
         for (int i = 0; i < n; i++) {
-            int j = (i + 1) % n;
-            int k = (i + 2) % n;
-            double z1 = (points[i].x - x) * (points[j].y - points[i].y) - (points[j].x - points[i].x) * (points[i].y - y);
-            double z2 = (points[j].x - x) * (points[k].y - points[j].y) - (points[k].x - points[j].x) * (points[j].y - y);
-            double z3 = (points[k].x - x) * (points[i].y - points[k].y) - (points[i].x - points[k].x) * (points[k].y - y);
+            int s = (i + 1) % n;
+            int t = (i + 2) % n;
+            double z1 = (points[i].getX() - x) * (points[s].getY() - points[i].getY()) - (points[s].getX() - points[i].getX()) * (points[i].getY() - y);
+            double z2 = (points[s].getX() - x) * (points[t].getY() - points[s].getY()) - (points[t].getX() - points[s].getX()) * (points[s].getY() - y);
+            double z3 = (points[t].getX() - x) * (points[i].getY() - points[t].getY()) - (points[i].getX() - points[t].getX()) * (points[t].getY() - y);
 
-            if (checkCondition(x, y, z1, z2, z3, i, j ,k)) {
+            if (checkCondition(x, y, z1, z2, z3, i, s, t)) {
                 resalt += 0;
                 digit += 1;
             } else {
@@ -68,9 +92,9 @@ public class Polygon {
                 (z1 == 0 && z2 < 0 && z3 < 0) ||
                 (z1 < 0 && z2 == 0 && z3 < 0) ||
                 (z1 < 0 && z2 < 0 && z3 == 0) ||
-                (points[i].x == x && points[i].y == y) ||
-                (points[j].x == x && points[j].y == y) ||
-                (points[k].x == x && points[k].y == y);
+                (points[i].getX() == x && points[i].getY() == y) ||
+                (points[j].getX() == x && points[j].getY() == y) ||
+                (points[k].getX() == x && points[k].getY() == y);
 
     }
 }

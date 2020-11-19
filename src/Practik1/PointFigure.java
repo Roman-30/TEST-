@@ -1,10 +1,10 @@
 package Practik1;
 
 public class PointFigure {
-    public double x0;
-    public double y0;
-    public String name;
-    public Figure type;
+    private final double x0;
+    private final double y0;
+    private final String name;
+    private final Figure type = Figure.Point;
 
     public PointFigure(double x0, double y0, String name) {
         this.x0 = x0;
@@ -16,8 +16,8 @@ public class PointFigure {
         return name;
     }
 
-    public Figure setType() {
-        return type = Figure.Point;
+    public Figure getType() {
+        return type;
     }
 
     public boolean isPointInside(double x, double y) {

@@ -1,11 +1,11 @@
 package Practik1;
 
 public class Circle {
-    public double x0;
-    public double y0;
-    public double radius;
-    public String name;
-    public Figure type;
+    private final double x0;
+    private final double y0;
+    private final double radius;
+    private final String name;
+    private final Figure type = Figure.Circle;
 
     public Circle(double x0, double y0, double radius, String name) {
         this.x0 = x0;
@@ -18,8 +18,8 @@ public class Circle {
         return name;
     }
 
-    public Figure setType() {
-        return type = Figure.Circle;
+    public Figure getType() {
+        return type;
     }
 
     public boolean isPointInside(double x, double y) {
