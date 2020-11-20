@@ -27,7 +27,7 @@ public class Polygon {
         }
         if (n == 3) {
             return points;
-        } else if (n >= 4 && Polygon.definePolygon(points, n)) {
+        } else if (n >= 4 && definePolygon(points, n)) {
             System.out.println("Polygon convex");
             return points;
         } else {
