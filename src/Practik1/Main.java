@@ -15,17 +15,29 @@ public class Main {
             int countOfVertices = readTheNumberVertices("Enter the number of vertices: ");
             Polygon poligon = new Polygon(countOfVertices, Polygon.setPolygonPoints(countOfVertices), readName("Enter poligon name: "));
 
-            startProgram(pointFigure, lineSegment, circle, poligon);
+            setPointToCheck(pointFigure, lineSegment, circle, poligon);
         } else {
             System.out.println("Error. The program does not work correctly!\n");
         }
     }
 
-    public static void startProgram(PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
-        double x = readCoordinate("Enter coordinate X check: ");
-        double y = readCoordinate("Enter coordinate Y check: ");
-        System.out.println(" ");
-        printAnswer(x, y, pointFigure, lineSegment, circle, poligon);
+    public static void setPointToCheck(PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
+        int restart = 1;
+        while (restart == 1) {
+            double x = readCoordinate("Enter X coordinate: ");
+            double y = readCoordinate("Enter Y coordinate: ");
+            System.out.println(" ");
+
+            printAnswer(x, y, pointFigure, lineSegment, circle, poligon);
+
+            restart = readTheNumberVertices("If you wanted re-start program input '1' if you wanted finish program input '0' : ");
+            System.out.println(" ");
+
+            if (restart == 0) {
+                System.out.println("Finish.");
+            }
+        }
+
     }
 
     public static void printAnswer(double x, double y, PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
@@ -45,6 +57,7 @@ public class Main {
         if (!pointFigure.isPointInside(x, y) && !lineSegment.isPointInside(x, y) && !circle.isPointInside(x, y) && !poligon.isPointInside(x, y)) {
             System.out.println("You are not in any of the figure areas");
         }
+        System.out.println(" ");
     }
 
     public static int readTheNumberVertices(String name) {

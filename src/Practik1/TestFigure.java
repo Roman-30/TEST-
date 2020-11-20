@@ -7,7 +7,7 @@ public class TestFigure {
         PointFigure pointFigureTest = new PointFigure(1, 1, "Point1");
         LineSegment lineSegmentTest = new LineSegment(7, 7, 4, 4, "Line segment1");
         Circle circleTest = new Circle(-5, -6, 2, "Circle1");
-        Polygon poligonTest = new Polygon(4, getPoints(), "Poligon1");
+        Polygon poligonTest = new Polygon(4, setPoints(), "Poligon1");
 
         TestCase[] casePoints = new TestCase[4];
         casePoints[0] = new TestCase(1, 1, Figure.Point, "Point1");
@@ -46,7 +46,7 @@ public class TestFigure {
         return resalt;
     }
 
-    public static Point[] getPoints() {
+    public static Point[] setPoints() {
         Point[] points = new Point[4];
         points[0] = new Point(0, 0);
         points[1] = new Point(0, -4);
