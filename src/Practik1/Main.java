@@ -37,7 +37,6 @@ public class Main {
                 System.out.println("Finish.");
             }
         }
-
     }
 
     public static void printAnswer(double x, double y, PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
