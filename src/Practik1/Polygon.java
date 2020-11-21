@@ -25,9 +25,10 @@ public class Polygon {
             Point point = new Point(x0, y0);
             points[i] = point;
         }
+
         if (n == 3) {
             return points;
-        } else if (n >= 4 && Polygon.definePolygon(points, n)) {
+        } else if (n >= 4 && definePolygon(points, n)) {
             System.out.println("Polygon convex");
             return points;
         } else {
@@ -95,6 +96,5 @@ public class Polygon {
                 (points[i].getX() == x && points[i].getY() == y) ||
                 (points[j].getX() == x && points[j].getY() == y) ||
                 (points[k].getX() == x && points[k].getY() == y);
-
     }
 }

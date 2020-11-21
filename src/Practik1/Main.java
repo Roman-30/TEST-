@@ -12,7 +12,7 @@ public class Main {
             PointFigure pointFigure = new PointFigure(readCoordinate("Enter coordinate X figure point: "), readCoordinate("Enter coordinate Y figure point: "), readName("Enter figure point name: "));
             LineSegment lineSegment = new LineSegment(readCoordinate("Enter first coordinate X line segment: "), readCoordinate("Enter first coordinate Y line segment: "), readCoordinate("Enter second coordinate X line segment: "), readCoordinate("Enter second coordinate Y line segment: "), readName("Enter line segment name: "));
             Circle circle = new Circle(readCoordinate("Enter the coordinate X of the center of the circle: "), readCoordinate("Enter the coordinate Y of the center of the circle: "), readCoordinate("Enter radius of the circle: "), readName("Enter circle name: "));
-            int countOfVertices = readTheNumberVertices("Enter the number of vertices: ");
+            int countOfVertices = readSomething("Enter the number of vertices: ");
             Polygon poligon = new Polygon(countOfVertices, Polygon.setPolygonPoints(countOfVertices), readName("Enter poligon name: "));
 
             setPointToCheck(pointFigure, lineSegment, circle, poligon);
@@ -24,20 +24,19 @@ public class Main {
     public static void setPointToCheck(PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
         int restart = 1;
         while (restart == 1) {
-            double x = readCoordinate("Enter X coordinate: ");
-            double y = readCoordinate("Enter Y coordinate: ");
+            double x = readCoordinate("Enter X coordinate check: ");
+            double y = readCoordinate("Enter Y coordinate check: ");
             System.out.println(" ");
 
             printAnswer(x, y, pointFigure, lineSegment, circle, poligon);
 
-            restart = readTheNumberVertices("If you wanted re-start program input '1' if you wanted finish program input '0' : ");
+            restart = readSomething("If you wanted re-start program input '1' if you wanted finish program input '0' : ");
             System.out.println(" ");
 
             if (restart == 0) {
                 System.out.println("Finish.");
             }
         }
-
     }
 
     public static void printAnswer(double x, double y, PointFigure pointFigure, LineSegment lineSegment, Circle circle, Polygon poligon) {
@@ -60,7 +59,7 @@ public class Main {
         System.out.println(" ");
     }
 
-    public static int readTheNumberVertices(String name) {
+    public static int readSomething(String name) {
         Scanner scn3 = new Scanner(System.in);
         System.out.print(name);
         return scn3.nextInt();
