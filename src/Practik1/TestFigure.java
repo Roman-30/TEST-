@@ -4,45 +4,45 @@ public class TestFigure {
     public static boolean testMyFigures() {
         boolean resalt = true;
 
-        PointFigure pointFigureTest = new PointFigure(1, 1, "Point1");
-        LineSegment lineSegmentTest = new LineSegment(7, 7, 4, 4, "Line segment1");
-        Circle circleTest = new Circle(-5, -6, 2, "Circle1");
-        Polygon poligonTest = new Polygon(4, setPoints(), "Poligon1");
+        Pictures picturesTest = new Pictures(
+                new Polygon(4, setPoints(), "Poligon1"),
+                new PointFigure(1, 1, "Point1"),
+                new LineSegment(7, 7, 4, 4, "Line segment1"),
+                new Circle(-5, -6, 2, "Circle1"));
 
         TestCase[] casePoints = new TestCase[4];
-        casePoints[0] = new TestCase(1, 1, Figure.Point, "Point1");
-        casePoints[1] = new TestCase(7, 7, Figure.Line_segment, "Line segment1");
-        casePoints[2] = new TestCase(-5, -6, Figure.Circle, "Circle1");
-        casePoints[3] = new TestCase(-4, 0, Figure.Polygon, "Poligon1");
+        casePoints[0] = new TestCase(1, 1, FigureType.Point, "Point1");
+        casePoints[1] = new TestCase(7, 7, FigureType.Line_segment, "Line segment1");
+        casePoints[2] = new TestCase(-5, -6, FigureType.Circle, "Circle1");
+        casePoints[3] = new TestCase(-4, 0, FigureType.Polygon, "Poligon1");
 
-        if (pointFigureTest.isPointInside(casePoints[0].getX(), casePoints[0].getY()) && (pointFigureTest.getType().equals(casePoints[0].getFigure()) && (pointFigureTest.getName().equals(casePoints[0].getName())))) {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", pointFigureTest.getType(), pointFigureTest.getName(), casePoints[0].getFigure(), casePoints[0].getName(), true);
+        if (picturesTest.getPolygon().isPointInside(casePoints[3].getX(), casePoints[3].getY()) && (picturesTest.getPolygon().getType().equals(casePoints[3].getFigure()) && (picturesTest.getPolygon().getName().equals(casePoints[3].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", picturesTest.getPolygon().getType(), picturesTest.getPolygon().getName(), casePoints[3].getFigure(), casePoints[3].getName(), true);
         } else {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", pointFigureTest.getType(), pointFigureTest.getName(), casePoints[0].getFigure(), casePoints[0].getName(), false);
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", picturesTest.getPolygon().getType(), picturesTest.getPolygon().getName(), casePoints[3].getFigure(), casePoints[3].getName(), false);
             resalt = false;
         }
 
-        if (lineSegmentTest.isPointInside(casePoints[1].getX(), casePoints[1].getY()) && (lineSegmentTest.getType().equals(casePoints[1].getFigure()) && (lineSegmentTest.getName().equals(casePoints[1].getName())))) {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", lineSegmentTest.getType(), lineSegmentTest.getName(), casePoints[1].getFigure(), casePoints[1].getName(), true);
+        if (picturesTest.getPointFigure().isPointInside(casePoints[0].getX(), casePoints[0].getY()) && (picturesTest.getPointFigure().getType().equals(casePoints[0].getFigure()) && (picturesTest.getPointFigure().getName().equals(casePoints[0].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", picturesTest.getPointFigure().getType(), picturesTest.getPointFigure().getName(), casePoints[0].getFigure(), casePoints[0].getName(), true);
         } else {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", lineSegmentTest.getType(), lineSegmentTest.getName(), casePoints[1].getFigure(), casePoints[1].getName(), false);
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", picturesTest.getPointFigure().getType(), picturesTest.getPointFigure().getName(), casePoints[0].getFigure(), casePoints[0].getName(), false);
             resalt = false;
         }
 
-        if (circleTest.isPointInside(casePoints[2].getX(), casePoints[2].getY()) && (circleTest.getType().equals(casePoints[2].getFigure()) && (circleTest.getName().equals(casePoints[2].getName())))) {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", circleTest.getType(), circleTest.getName(), casePoints[2].getFigure(), casePoints[2].getName(), true);
+        if (picturesTest.getLineSegment().isPointInside(casePoints[1].getX(), casePoints[1].getY()) && (picturesTest.getLineSegment().getType().equals(casePoints[1].getFigure()) && (picturesTest.getLineSegment().getName().equals(casePoints[1].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", picturesTest.getLineSegment().getType(), picturesTest.getLineSegment().getName(), casePoints[1].getFigure(), casePoints[1].getName(), true);
         } else {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", circleTest.getType(), circleTest.getName(), casePoints[2].getFigure(), casePoints[2].getName(), false);
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n", picturesTest.getLineSegment().getType(), picturesTest.getLineSegment().getName(), casePoints[1].getFigure(), casePoints[1].getName(), false);
             resalt = false;
         }
 
-        if (poligonTest.isPointInside(casePoints[3].getX(), casePoints[3].getY()) && (poligonTest.getType().equals(casePoints[3].getFigure()) && (poligonTest.getName().equals(casePoints[3].getName())))) {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n \n", poligonTest.getType(), poligonTest.getName(), casePoints[3].getFigure(), casePoints[3].getName(), true);
+        if (picturesTest.getCircle().isPointInside(casePoints[2].getX(), casePoints[2].getY()) && (picturesTest.getCircle().getType().equals(casePoints[2].getFigure()) && (picturesTest.getCircle().getName().equals(casePoints[2].getName())))) {
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n \n", picturesTest.getCircle().getType(), picturesTest.getCircle().getName(), casePoints[2].getFigure(), casePoints[2].getName(), true);
         } else {
-            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n \n", poligonTest.getType(), poligonTest.getName(), casePoints[3].getFigure(), casePoints[3].getName(), false);
+            System.out.printf("Expected type %1S and name %2S --> got type %3S name %4S %5S \n \n", picturesTest.getCircle().getType(), picturesTest.getCircle().getName(), casePoints[2].getFigure(), casePoints[2].getName(), false);
             resalt = false;
         }
-
         return resalt;
     }
 

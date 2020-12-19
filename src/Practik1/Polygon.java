@@ -1,13 +1,13 @@
 package Practik1;
 
 public class Polygon {
-    private final int n;
+    private final int num;
     private final String name;
-    private final Figure type = Figure.Polygon;
+    private final FigureType type = FigureType.Polygon;
     private final Point[] points;
 
     public Polygon(int n, Point[] points, String name) {
-        this.n = n;
+        this.num = n;
         this.points = points;
         this.name = name;
     }
@@ -58,16 +58,16 @@ public class Polygon {
         return name;
     }
 
-    public Figure getType() {
+    public FigureType getType() {
         return type;
     }
 
     public boolean isPointInside(double x, double y) {
         int resalt = 0;
         int digit = 0;
-        for (int i = 0; i < n; i++) {
-            int s = (i + 1) % n;
-            int t = (i + 2) % n;
+        for (int i = 0; i < num; i++) {
+            int s = (i + 1) % num;
+            int t = (i + 2) % num;
             double z1 = (points[i].getX() - x) * (points[s].getY() - points[i].getY()) - (points[s].getX() - points[i].getX()) * (points[i].getY() - y);
             double z2 = (points[s].getX() - x) * (points[t].getY() - points[s].getY()) - (points[t].getX() - points[s].getX()) * (points[s].getY() - y);
             double z3 = (points[t].getX() - x) * (points[i].getY() - points[t].getY()) - (points[i].getX() - points[t].getX()) * (points[t].getY() - y);
@@ -80,7 +80,7 @@ public class Polygon {
                 digit += 0;
             }
         }
-        return (resalt != n) || (digit > 0);
+        return (resalt != num) || (digit > 0);
     }
 
     public boolean checkCondition(double x, double y, double z1, double z2, double z3, int i, int j, int k) {

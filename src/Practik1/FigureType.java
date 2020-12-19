@@ -1,6 +1,6 @@
 package Practik1;
 
-public enum Figure {
+public enum FigureType {
     Point,
     Line_segment,
     Circle,

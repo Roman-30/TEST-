@@ -4,7 +4,7 @@ public class PointFigure {
     private final double x0;
     private final double y0;
     private final String name;
-    private final Figure type = Figure.Point;
+    private final FigureType type = FigureType.Point;
 
     public PointFigure(double x0, double y0, String name) {
         this.x0 = x0;
@@ -16,7 +16,7 @@ public class PointFigure {
         return name;
     }
 
-    public Figure getType() {
+    public FigureType getType() {
         return type;
     }
 

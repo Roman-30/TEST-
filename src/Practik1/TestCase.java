@@ -3,10 +3,10 @@ package Practik1;
 public class TestCase {
     private final double x;
     private final double y;
-    private final Figure figure;
+    private final FigureType figure;
     private final String name;
 
-    public TestCase(double x, double y, Figure figure, String name) {
+    public TestCase(double x, double y, FigureType figure, String name) {
         this.x = x;
         this.y = y;
         this.figure = figure;
@@ -25,7 +25,7 @@ public class TestCase {
         return name;
     }
 
-    public Figure getFigure() {
+    public FigureType getFigure() {
         return figure;
     }
 }
